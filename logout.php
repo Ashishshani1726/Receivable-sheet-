@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/inc/auth.php';$u=current_user();if($u){try{db()->prepare("INSERT INTO audit_log(user_id,action,detail) VALUES(?,'logout','User logged out')")->execute([$u['id']]);}catch(Throwable $e){}}logout_user();header('Location: login.php');exit;

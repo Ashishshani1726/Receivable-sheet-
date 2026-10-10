@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/../inc/auth.php';$a=require_admin();$id=(int)($_GET['id']??0);verify_csrf($_GET['csrf']??'');if($id&&$id!==(int)$a['id']){db()->prepare('DELETE FROM users WHERE id=?')->execute([$id]);db()->prepare("INSERT INTO audit_log(user_id,action,detail) VALUES(?,'user_deleted',?)")->execute([$a['id'],'Deleted user ID '.$id]);}header('Location: users.php');exit;
